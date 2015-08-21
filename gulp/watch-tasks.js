@@ -2,27 +2,25 @@ var gulp = require('gulp');
 var cache = require('gulp-cached');
 var	remember = require('gulp-remember');
 var gutil = require('gulp-util');
-var runSequence = require('run-sequence');
 var flo = require('fb-flo');
 var fs = require('fs');
 
-var cssTasks = require("./css-tasks");
+var buildTasks = require("./build-tasks");
 var vendorTasks = require("./vendor-tasks");
 var serverTasks = require("./server-tasks");
 
 module.exports = function(files, sharedVars) {
 
-	cssTasks(files);
-	vendorTasks(files);
+	buildTasks(files);
 	serverTasks(files, sharedVars);
 	
 	gulp.task('watch', function() {
 
-		gulp.watch(files.app.watch, ['app:build']);
-		gulp.watch(files.vendor.watch, ['vendor:build']);
-		gulp.watch(files.less.watch, ['less']);
-		gulp.watch(files.server.watch, ['server:build']);
-		gulp.watch(files.locale.watch, ['locale:build']);
+		gulp.watch(files.app.watch, ['build:app']);
+		gulp.watch(files.vendor.watch, ['build:vendor']);
+		gulp.watch(files.less.watch, ['build:less']);
+		gulp.watch(files.server.watch, ['build:server']);
+		gulp.watch(files.locale.watch, ['build:locale']);
 
 		gulp.watch(['./imajs/**/*.{js,jsx}', './app/**/*.{js,jsx}', './build/static/js/locale/*.js']).on('change', function(e) {
 			sharedVars.watchEvent = e;
@@ -51,17 +49,6 @@ module.exports = function(files, sharedVars) {
 					//reload: filepath.match(/\.(js|html)$/)
 				});
 			});
-	});
-
-	// BUILD tasks for watch
-
-	gulp.task('app:build', function(callback) {
-		return runSequence(
-			'Es6ToEs5:client',
-			'server:restart',
-			'server:reload',
-			callback
-		);
 	});
 }
 

@@ -9,7 +9,7 @@ module.exports = function(files) {
 
 		function parseLocale(language) {
 			return (
-				gulp.src(['./app/locale/' + language + '/*.json'])
+				gulp.src([files.locale.base + language + '/*.json'])
 					.pipe(plumber())
 					.pipe(messageFormat({locale:language, global: 'that'}))
 					.pipe(plumber.stop())
@@ -26,16 +26,5 @@ module.exports = function(files) {
 		});
 
 		return locales[locales.length - 1];
-	});
-
-	// BUILD tasks for watch
-	gulp.task('locale:build', function(callback) {
-		return runSequence(
-			'locale',
-			'server:restart',
-			'server:reload',
-			callback
-		);
-	});
-	
+	});	
 }

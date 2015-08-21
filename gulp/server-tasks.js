@@ -43,16 +43,5 @@ module.exports = function(files, sharedVars) {
 
 	gulp.task('server:restart', function() {
 		server.start();
-	});
-
-	// BUILD tasks for watch
-	gulp.task('server:build', function(callback) {
-		return runSequence(
-			['copy:imajsServer', 'copy:environment'],
-			'Es6ToEs5:server',
-			'server:restart',
-			'server:reload',
-			callback
-		);
-	});
+	});	
 }

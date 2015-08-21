@@ -35,17 +35,5 @@ module.exports = function(files) {
 	gulp.task('vendor:clean', function() {
 		return gulp.src(files.vendor.tmp, {read: false})
 			.pipe(clean());
-	});
-
-	// BUILD tasks for watch
-	gulp.task('vendor:build', function(callback) {
-		return runSequence(
-			'Es6ToEs5:vendor',
-			['vendor:client', 'vendor:server'],
-			'vendor:clean',
-			'server:restart',
-			'server:reload',
-			callback
-		);
-	});
+	});	
 }
