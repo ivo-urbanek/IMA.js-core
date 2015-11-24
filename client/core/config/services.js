@@ -5,6 +5,10 @@ export var init = (ns, oc, config) => {
 		.init(config.dictionary);
 
 	oc
+		.get('$Intl')
+		.init(config.dictionary);
+
+	oc
 		.get('$Dispatcher')
 		.clear();
 

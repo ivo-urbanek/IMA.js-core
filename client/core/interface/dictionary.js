@@ -62,6 +62,32 @@ export default class Dictionary {
 	 *         replaced with the provided parameters.
 	 */
 	get(key, parameters = {}) {}
+
+	/**
+	 * Returns the ISO 639-1 language code of the language this dictionary was
+	 * initialized with.
+	 *
+	 * @method getLanguage
+	 * @return {string} The language code representing the language of the
+	 *         localization phrases in this dictionary.
+	 */
+	getLanguage() {}
+
+	/**
+	 * Retrieves the localization phrase identified by the specified key,
+	 * replaces the parameter placeholder with the provided parameters and
+	 * returns the result.
+	 *
+	 * @method get
+	 * @param {string} key The key identifying the localization phrase,
+	 *        following the `${phraseGroup}.${phraseKey}` syntax.
+	 * @param {Object<string, (number|string)>=} parameters The map of
+	 *        parameter placeholder names to the parameter values to use.
+	 *        Defaults to an empty plain object.
+	 * @return {string} The specified localization phrase with its placeholders
+	 *         replaced with the provided parameters.
+	 */
+	get(key, parameters = {}) {}
 }
 
 ns.Core.Interface.Dictionary = Dictionary;

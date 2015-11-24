@@ -46,6 +46,7 @@ export var init = (ns, oc, config) => { //jshint ignore:line
 	//Dictionary
 	oc.provide(ns.Core.Interface.Dictionary, ns.Core.Dictionary.MessageFormat);
 	oc.bind('$Dictionary', ns.Core.Interface.Dictionary);
+	oc.bind('$Intl', ns.Core.Dictionary.IntlFormat);
 
 	//Request & Response
 	oc.bind('$Request', ns.Core.Router.Request);
